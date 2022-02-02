@@ -1,0 +1,14 @@
+# Create two replicas of a pod using deployment, 
+# then manually change the labels of the pods to observe new pod being spinned up.
+# Please make sure you understand what's happening.
+
+
+# create deployment
+kubectl create deployment nginx --image=nginx  --replicas=2
+
+
+# edit pod to change labels
+kubectl edit pod/testdeploy-5488459d6f-84q88
+
+# changing the labels of pods will result in new pod being created by replicaset of deployment nginx
+

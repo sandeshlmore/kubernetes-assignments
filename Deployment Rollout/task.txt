@@ -1,0 +1,10 @@
+Run an nginx pod, upgrade the image tag to (latest-not-available) that would break the pod. 
+Now rollback that upgrade to revert the changes.
+Hint: Use rollout to see and revert the changes.
+
+
+kubectl create deployment nginx --image=nginx 
+
+kubectl set image deployment ng nginx=niginx:latest-not-available
+
+kubectl rollout undo deployment ng --to-revision=1

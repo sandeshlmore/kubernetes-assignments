@@ -1,0 +1,21 @@
+# Create a pod that uses hostPath as volume and understand the drawbacks of it.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: host-path-demo
+  namespace: default
+spec:
+  containers:
+  - name: nginx1
+    image: nginx
+    volumeMounts:
+      - name: foo
+        mountPath: "/etc/foo"
+  volumes:
+    - name: foo
+      hostPath:
+        path: /data
+
+
+# host path are not suitable for persisting data and sharing data across pods on different nodes. if node goes down data is lost.

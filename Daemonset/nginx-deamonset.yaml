@@ -1,0 +1,31 @@
+# Create an nginx pod on every node of Kubernetes cluster, 
+# if a new node added to the cluster this pod should automatically 
+# be added on that node as well.
+
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nginx-daemon-set
+  labels:
+    app: nginx-daemon-set
+spec:
+  selector:
+    matchLabels:
+      app: nginx-daemon-set
+  template:
+    metadata:
+      labels:
+        app: nginx-daemon-set
+    spec:
+      tolerations:
+      # this toleration is to have the daemonset runnable on master nodes
+      # remove it if your masters can't run pods
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+          - containerPort: 80

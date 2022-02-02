@@ -1,0 +1,19 @@
+# Create an nginx deployment, 
+# expose it using service and 
+# then run another pod in the same namespace to access that nginx service.
+
+
+# create deployment
+kubectl create deployment nginx --image=nginx
+
+# expose deployment with service of type NodePort
+kubectl expose deployment nginx --type=NodePort --port=80 --target-port=80
+
+
+# verify service is working
+kubectl run busybox --image=busybox --rm -it --restart=Never  -- wget -O- http://nginx:80
+or
+k run busybox --image=busybox --rm -it --restart=Never  -- wget -O- http://$ClusterIP:$ServicePort
+or
+k run busybox --image=busybox --rm -it --restart=Never  -- wget -O- http://$NodeIP:$NodePort
+

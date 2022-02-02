@@ -1,0 +1,25 @@
+# Create a network policy that is not going to allow the connection that we mentioned in task 2.
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: ns-one-nginx-access-policy
+  namespace: ns-one
+spec:
+  podSelector:
+    matchLabels:
+      app: nginx
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    # - namespaceSelector:
+    #     matchLabels:
+    #       project: myproject
+    - podSelector:
+        matchLabels:
+          autherized: "true"
+    ports:
+    - protocol: TCP
+      port: 80
+        

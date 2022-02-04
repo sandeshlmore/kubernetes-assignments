@@ -5,6 +5,6 @@ Hint: Use rollout to see and revert the changes.
 
 kubectl create deployment nginx --image=nginx 
 
-kubectl set image deployment ng nginx=niginx:latest-not-available
+kubectl set image deployment nginx nginx=niginx:latest-not-available
 
-kubectl rollout undo deployment ng --to-revision=1
+kubectl rollout undo deployment nginx --to-revision=1

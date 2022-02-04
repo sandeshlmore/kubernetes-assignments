@@ -1,11 +1,9 @@
 apiVersion: v1
-kind: ConfigMap
+kind: Secret
 metadata:
-  name: pg-config
-  labels:
-    app: postgres
+  name: postgresql
 data:
-  POSTGRES_USER: booksuser
-  POSTGRES_PASSWORD: p@ssw0rd123
-  POSTGRES_DB: books
-  PGDATA: /var/lib/postgresql/data/pgdata
+  POSTGRES_PASSWORD: cGFzc3cwcmQxMjM=
+  POSTGRES_DB: Ym9va3M=
+  POSTGRES_USER: Ym9va3N1c2Vy
+  PGDATA: L3Zhci9saWIvcG9zdGdyZXNxbC9kYXRhL3BnZGF0YQ==

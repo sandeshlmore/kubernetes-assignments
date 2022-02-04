@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: postgresql-sfs
+  name: postgresql
 spec:
   selector:
     matchLabels:
-      app: postgresql-a 
-  serviceName: "postgresql-svc"
+      app: postgresql
+  serviceName: postgresql
   replicas: 1
   template:
     metadata:
       labels:
-        app: postgresql-a 
+        app: postgresql
     spec:
       containers:
-      - name: postgresql-db
+      - name: postgresql
         image: postgres:12
         envFrom:
-        - configMapRef:
-          name: pg-config
+        - secretRef:
+            name: postgresql
         ports:
         - containerPort: 5432
           name: postgresql-port
@@ -30,7 +30,7 @@ spec:
       name: data
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: "default"
+      storageClassName: "standard"
       resources:
         requests:
           storage: 1Gi
